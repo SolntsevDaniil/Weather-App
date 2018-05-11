@@ -1,5 +1,6 @@
+'use strict';
 class WeatherApp {
-    constructor(temp, loc, icon, humidity, wind, direction) {
+    constructor(temp, loc, icon, humidity, wind, direction, pressure) {
         this.APPID = '6c000acb4c2726dc146102c3dfb3b1e3';
         this.xhr = new XMLHttpRequest();
         this.temp = temp;
@@ -8,6 +9,7 @@ class WeatherApp {
         this.humidity = humidity;
         this.wind = wind;
         this.direction = direction;
+        this.pressure = pressure;
     };
 
     update(weather) {
@@ -17,6 +19,7 @@ class WeatherApp {
         this.humidity.innerHTML = weather.humidity;
         this.wind.innerHTML = weather.wind;
         this.direction.innerHTML = weather.direction;
+        this.pressure.innerHTML = weather.pressure;
     };
 
     updateByZip(zip) {
@@ -32,17 +35,17 @@ class WeatherApp {
                 let weather = {};
                 // weather.icon = data.weather.id;
                 weather.humidity = data.main.humidity;
-                weather.wind = data.wind.speed;
+                weather.wind = data.wind.speed + ' meters/sec';
                 weather.direction = this.degreesToDirection(data.wind.deg);
                 weather.loc = data.name;
                 weather.temp = data.main.temp;
+                weather.pressure = data.main.pressure;
                 this.update(weather);
             }
         };
         this.xhr.send();
     };
 
-    //kelvinToCelsius(k) { return Math.round(k - 273.15); };
     degreesToDirection(degrees) {
         let range = 360/16,
             low = 360 - range / 2,
@@ -67,6 +70,7 @@ const temp = document.querySelector('.temp'),
       humidity = document.querySelector('.humidity'),
       wind = document.querySelector('.wind'),
       direction = document.querySelector('.direction'),
-      weatherapp = new WeatherApp(temp, loc, icon, humidity, wind, direction);
+      pressure = document.querySelector('.pressure'),
+      weatherapp = new WeatherApp(temp, loc, icon, humidity, wind, direction, pressure);
 
 weatherapp.updateByZip(109202);
