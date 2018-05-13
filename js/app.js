@@ -1,7 +1,7 @@
 'use strict';
 class WeatherApp {
     // Constructor init
-    constructor(temp, loc, humidity, wind, pressure, description) {
+    constructor(temp, loc, humidity, wind, pressure, description, timestamp) {
         this.APPID = '6c000acb4c2726dc146102c3dfb3b1e3';
         this.xhr = new XMLHttpRequest();
         this.lon = undefined;
@@ -12,6 +12,12 @@ class WeatherApp {
         this.wind = wind;
         this.pressure = pressure;
         this.description = description;
+        this.timestamp = timestamp;
+    };
+
+    timeConverter(UNIX_time) {
+        let theDate = new Date(UNIX_time * 1000); 
+        return theDate.toLocaleString(); 
     };
 
     // Updating data method
@@ -22,6 +28,7 @@ class WeatherApp {
         this.wind.innerHTML = weather.wind;
         this.pressure.innerHTML = weather.pressure;
         this.description.innerHTML = weather.description;
+        this.timestamp.innerHTML = weather.timestamp;
     };
 
     // Make a URL and send it
@@ -64,6 +71,7 @@ class WeatherApp {
                 weather.temp = data.main.temp + '°C';
                 weather.pressure = '<span class="bold">' + pressure.toFixed(2) + '</span> mm';
                 weather.description = data.weather[0].description;
+                weather.timestamp = this.timeConverter(data.dt);
 
                 // Update the data
                 this.update(weather);
@@ -79,6 +87,7 @@ const temp = document.querySelector('.weather__temp'),
       wind = document.querySelector('.weather__wind'),
       pressure = document.querySelector('.weather__pressure'),
       description = document.querySelector('.weather__description'),
-      weatherapp = new WeatherApp(temp, loc, humidity, wind, pressure, description);
+      timestamp = document.querySelector('.weather__time'),
+      weatherapp = new WeatherApp(temp, loc, humidity, wind, pressure, description, timestamp);
 
 weatherapp.getCurrentPosition();
