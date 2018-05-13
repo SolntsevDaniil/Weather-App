@@ -118,13 +118,20 @@ table {
 @media (max-width: 550px) {
   .weather {
     width: 100%;
-    height: 100vh; } }
+    height: 100vh;
+    border-radius: 0; }
+
+  .footer {
+    border-radius: 0; } }
 @media (max-width: 340px) {
   .weather__wind {
     display: block; }
   .weather__pressure {
     display: block; }
   .weather__humidity {
-    padding-top: 2.8em; } }
+    padding-top: 2.8em; }
+
+  .footer {
+    border-radius: 0; } }
 
 /*# sourceMappingURL=styles.css.map */

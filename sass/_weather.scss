@@ -1,0 +1,55 @@
+.weather {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+
+    width: 50em;
+    height: 90vh;
+
+    box-shadow: 0 1px 10px rgba(0, 0, 0, .2);
+    border-radius: 15px;
+
+    transition: all .3s;
+    &__time {
+        font-size: 1.4em;
+        padding: 3.428571428571429em;
+        padding-top: 1em;
+        color: rgba($color: $dark, $alpha: 0.6)
+    }
+    &__temp {
+        font-size: 6.4em;
+        font-weight: bolder;
+        padding: .75em;
+        padding-bottom: 0;
+        margin-top: .78125em;
+    }
+    &__description {
+        font-size: 1.5em;
+        padding: 3.3em;
+        padding-top: 1em;
+        color: rgba($color: $dark, $alpha: 0.8);
+    }
+    &__wind {
+        display: inline-block;
+        padding: 2.8em 0 2.8em 0;
+        margin-right: 1em;
+    }
+    &__pressure {
+        display: inline-block;
+        margin-right: 1.2em;
+    }
+    &__humidity { display: inline-block; }
+
+    .wrap {
+        font-size: 1.4em;
+        padding-left: 3.428571428571429em;
+
+        .bold {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    }
+    &:hover { box-shadow: 0 2px 300px rgba(0, 0, 0, .2); }
+}
